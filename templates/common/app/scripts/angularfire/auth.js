@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('firebase.auth', [])
+angular.module('firebase.Auth', [])
 
   <%  if( loginModule ) { %>
 

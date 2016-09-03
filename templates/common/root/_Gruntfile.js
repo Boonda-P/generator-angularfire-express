@@ -144,7 +144,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           open: true,
-          base: '<%%= yeoman.dist %>'
+          base: '<%%= yeoman.dist %><% if (express) { %>/public<% } %>'
         }
       }
     },
@@ -177,8 +177,8 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
-            '<%%= yeoman.dist %>/{,*/}*',
-            '!<%%= yeoman.dist %>/.git{,*/}*'
+            '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/{,*/}*',
+            '!<%%= yeoman.dist %><% if (express) { %>/public<% } %>/.git{,*/}*'
           ]
         }]
       },
@@ -295,7 +295,7 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
-          generatedImagesDir: '<%%= yeoman.dist %>/images/generated'
+          generatedImagesDir: '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/images/generated'
         }
       },
       server: {
@@ -309,10 +309,10 @@ module.exports = function (grunt) {
     filerev: {
       dist: {
         src: [
-          '<%%= yeoman.dist %>/scripts/{,*/}*.js',
-          '<%%= yeoman.dist %>/styles/{,*/}*.css',
-          '<%%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%%= yeoman.dist %>/styles/fonts/*'
+          '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/scripts/{,*/}*.js',
+          '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/styles/{,*/}*.css',
+          '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/styles/fonts/*'
         ]
       }
     },
@@ -323,7 +323,7 @@ module.exports = function (grunt) {
     useminPrepare: {
       html: '<%%= yeoman.app %>/index.html',
       options: {
-        dest: '<%%= yeoman.dist %>',
+        dest: '<%%= yeoman.dist %><% if (express) { %>/public<% } %>',
         flow: {
           html: {
             steps: {
@@ -338,13 +338,13 @@ module.exports = function (grunt) {
 
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
-      html: ['<%%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%%= yeoman.dist %>/styles/{,*/}*.css'],
+      html: ['<%%= yeoman.dist %><% if (express) { %>/public<% } %>/{,*/}*.html'],
+      css: ['<%%= yeoman.dist %><% if (express) { %>/public<% } %>/styles/{,*/}*.css'],
       options: {
         assetsDirs: [
-          '<%%= yeoman.dist %>',
-          '<%%= yeoman.dist %>/images',
-          '<%%= yeoman.dist %>/styles'
+          '<%%= yeoman.dist %><% if (express) { %>/public<% } %>',
+          '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/images',
+          '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/styles'
         ]
       }
     },
@@ -356,7 +356,7 @@ module.exports = function (grunt) {
     // cssmin: {
     //   dist: {
     //     files: {
-    //       '<%%= yeoman.dist %>/styles/main.css': [
+    //       '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/styles/main.css': [
     //         '.tmp/styles/{,*/}*.css'
     //       ]
     //     }
@@ -365,8 +365,8 @@ module.exports = function (grunt) {
     // uglify: {
     //   dist: {
     //     files: {
-    //       '<%%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%%= yeoman.dist %>/scripts/scripts.js'
+    //       '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/scripts/scripts.js': [
+    //         '<%%= yeoman.dist %><% if (express) { %>/public<% } %><% if (express) { %>/public<% } %>/scripts/scripts.js'
     //       ]
     //     }
     //   }
@@ -381,7 +381,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%%= yeoman.app %>/images',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%%= yeoman.dist %>/images'
+          dest: '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/images'
         }]
       }
     },
@@ -392,7 +392,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%%= yeoman.app %>/images',
           src: '{,*/}*.svg',
-          dest: '<%%= yeoman.dist %>/images'
+          dest: '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/images'
         }]
       }
     },
@@ -408,9 +408,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%%= yeoman.dist %>',
+          cwd: '<%%= yeoman.dist %><% if (express) { %>/public<% } %>',
           src: ['*.html', 'views/{,*/}*.html'],
-          dest: '<%%= yeoman.dist %>'
+          dest: '<%%= yeoman.dist %><% if (express) { %>/public<% } %>'
         }]
       }
     },
@@ -431,18 +431,23 @@ module.exports = function (grunt) {
     // Replace Google CDN references
     cdnify: {
       dist: {
-        html: ['<%%= yeoman.dist %>/*.html']
+        html: ['<%%= yeoman.dist %><% if (express) { %>/public<% } %>/*.html']
       }
     },
 
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
-        files: [{
+        files: [<% if (express) { %{
+          expand: true,
+          cwd: './server/',
+          dest: '<%= yeoman.dist %>/server',
+          src: '**/*.*'
+        }, <% }%>{
           expand: true,
           dot: true,
           cwd: '<%%= yeoman.app %>',
-          dest: '<%%= yeoman.dist %>',
+          dest: '<%%= yeoman.dist %><% if (express) { %>/public<% } %>',
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
@@ -454,7 +459,7 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           cwd: '.tmp/images',
-          dest: '<%%= yeoman.dist %>/images',
+          dest: '<%%= yeoman.dist %><% if (express) { %>/public<% } %>/images',
           src: ['generated/*']
         }<% if (bootstrap) { %>, {
           expand: true,
@@ -467,7 +472,7 @@ module.exports = function (grunt) {
               %>bower_components/bootstrap-sass-official/assets/fonts/bootstrap<%
             } else { %>fonts<% }
             %>/*',
-          dest: '<%%= yeoman.dist %>'
+          dest: '<%%= yeoman.dist %><% if (express) { %>/public<% } %>'
         }<% } %>]
       },
       styles: {
@@ -511,7 +516,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', 'Compile then start a connect/express web server', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
+      return grunt.task.run(['build', '<% if (express) { %>express:prod<% } else { %>connect:dist:keepalive<% } %>']);
     }
 
     grunt.task.run([

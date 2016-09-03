@@ -421,7 +421,7 @@ Generator.prototype.askForModules = function askForModules() {
     angMods.push("'firebase'");
     if (this.loginModule) {
       this.env.options.loginModule = true;
-      angMods.push("'firebase.auth'");
+      angMods.push("'firebase.Auth'");
     }
 
     if (this.express) {
