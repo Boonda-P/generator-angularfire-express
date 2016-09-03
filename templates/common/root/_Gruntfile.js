@@ -438,7 +438,7 @@ module.exports = function (grunt) {
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
-        files: [<% if (express) { %{
+        files: [<% if (express) { %>{
           expand: true,
           cwd: './server/',
           dest: '<%= yeoman.dist %>/server',
