@@ -1,8 +1,8 @@
 'use strict';
 var util = require('util');
-var ScriptBase = require('../script-base2.js');
 var fs = require('fs');
 var path = require('path');
+var ScriptBase = require(path.join(__dirname, '../script-base.js'));
 
 function buildRelativePath(fileName){
   return path.join('decorators', fileName + "Decorator");

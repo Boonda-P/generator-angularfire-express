@@ -1,6 +1,7 @@
 'use strict';
 var util = require('util');
-var ScriptBase = require('../script-base2.js');
+var path = require('path');
+var ScriptBase = require(path.join(__dirname, '../script-base.js'));
 
 
 var Generator = module.exports = function Generator() {
