@@ -14,7 +14,7 @@
     "express"
   ],
   "author": "matheushf (Based in Kato repo, with thanks to Yeoman and Angular teams)",
-  "main": "app/index.js" 
+  "main": "app/index.js",
   "repository": "matheushf/generator-angularfire-express",
   "scripts": {
     "test": "mocha"
