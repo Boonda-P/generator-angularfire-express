@@ -1,6 +1,6 @@
 {
   "name": "generator-angularfire-express",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Yeoman generator for Angular + Firebase(SDK 3.0) + Minimalist Express",
   "keywords": [
     "yeoman-generator",
@@ -14,29 +14,7 @@
     "express"
   ],
   "author": "matheushf (Based in Kato repo, with thanks to Yeoman and Angular teams)",
-  "main": "app/index.js",
-  "files": [
-    "app",
-    "common",
-    "constant",
-    "controller",
-    "decorator",
-    "directive",
-    "factory",
-    "filter",
-    "main",
-    "provider",
-    "route",
-    "service",
-    "templates",
-    "value",
-    "view",
-    "base",
-    "script-base.js",
-    "script-base2.js",
-    "util.js",
-    "angularfire"
-  ],
+  "main": "app/index.js" 
   "repository": "matheushf/generator-angularfire-express",
   "scripts": {
     "test": "mocha"
